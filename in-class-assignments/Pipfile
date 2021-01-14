@@ -11,6 +11,8 @@ pandas = "*"
 matplotlib = "*"
 seaborn = "*"
 jupyterlab = "*"
+beautifulsoup4 = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.9"
