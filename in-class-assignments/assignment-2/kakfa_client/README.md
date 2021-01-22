@@ -8,5 +8,5 @@ You can find the documentation and instructions for running this Python example 
 
 # Useful Commands
 
-`python3 ./producer.py -f ../config/librdkafka.config -t test1`
-`python3 ./consumer.py -f ../config/librdkafka.config -t test1`
+`python3 consumer-2.py -f ../config/librdkafka.config -t topic-name`
+`python3 producer-2.py -f ../config/librdkafka.config -t topic-name`
