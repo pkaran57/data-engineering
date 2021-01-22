@@ -19,14 +19,13 @@
 #
 # Produce messages to Confluent Cloud
 # Using Confluent Python Client for Apache Kafka
-# Writes Avro data, integration with Confluent Cloud Schema Registry
 #
 # =============================================================================
-from confluent_kafka import SerializingProducer
-from confluent_kafka.schema_registry import SchemaRegistryClient
-from confluent_kafka.schema_registry.avro import AvroSerializer
+
+import json
 
 import ccloud_lib
+from confluent_kafka import Producer
 
 if __name__ == '__main__':
 
@@ -36,36 +35,17 @@ if __name__ == '__main__':
     topic = args.topic
     conf = ccloud_lib.read_ccloud_config(config_file)
 
-    # Create topic if needed
-    ccloud_lib.create_topic(conf, topic)
-
-    # for full list of configurations, see:
-    #  https://docs.confluent.io/current/clients/confluent-kafka-python/#schemaregistryclient
-    schema_registry_conf = {
-        'url': conf['schema.registry.url'],
-        'basic.auth.user.info': conf['schema.registry.basic.auth.user.info']}
-
-    schema_registry_client = SchemaRegistryClient(schema_registry_conf)
-
-    name_avro_serializer = AvroSerializer(ccloud_lib.name_schema,
-                                          schema_registry_client,
-                                          ccloud_lib.Name.name_to_dict)
-    count_avro_serializer = AvroSerializer(ccloud_lib.count_schema,
-                                           schema_registry_client,
-                                           ccloud_lib.Count.count_to_dict)
-
-    # for full list of configurations, see:
-    #  https://docs.confluent.io/current/clients/confluent-kafka-python/#serializingproducer
-    producer_conf = {
+    # Create Producer instance
+    producer = Producer({
         'bootstrap.servers': conf['bootstrap.servers'],
         'sasl.mechanisms': conf['sasl.mechanisms'],
         'security.protocol': conf['security.protocol'],
         'sasl.username': conf['sasl.username'],
         'sasl.password': conf['sasl.password'],
-        'key.serializer': name_avro_serializer,
-        'value.serializer': count_avro_serializer}
+    })
 
-    producer = SerializingProducer(producer_conf)
+    # Create topic if needed
+    ccloud_lib.create_topic(conf, topic)
 
     delivered_records = 0
 
@@ -84,16 +64,15 @@ if __name__ == '__main__':
             print("Produced record to topic {} partition [{}] @ offset {}"
                   .format(msg.topic(), msg.partition(), msg.offset()))
 
-    for n in range(10):
-        name_object = ccloud_lib.Name()
-        name_object.name = "alice"
-        count_object = ccloud_lib.Count()
-        count_object.count = n
-        print("Producing Avro record: {}\t{}".format(name_object.name, count_object.count))
-        producer.produce(topic=topic, key=name_object, value=count_object, on_delivery=acked)
+    for n in range(100):
+        record_key = "alice"
+        record_value = json.dumps({'count': n})
+        print("Producing record: {}\t{}".format(record_key, record_value))
+        producer.produce(topic, key=record_key, value=record_value, on_delivery=acked)
+        # p.poll() serves delivery reports (on_delivery)
+        # from previous produce() calls.
         producer.poll(0)
 
     producer.flush()
 
     print("{} messages were produced to topic {}!".format(delivered_records, topic))
-
