@@ -24,6 +24,7 @@
 
 import json
 import os
+import time
 
 from confluent_kafka import Producer
 
@@ -75,6 +76,7 @@ if __name__ == '__main__':
         record_value = json.dumps(data[n])
         print("Producing record: {}\t{}".format(record_key, record_value))
         producer.produce(topic, key=record_key, value=record_value, on_delivery=acked)
+        time.sleep(0.25)
         # p.poll() serves delivery reports (on_delivery)
         # from previous produce() calls.
         producer.poll(0)
