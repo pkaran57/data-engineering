@@ -1,0 +1,39 @@
+#,Database Field Name,Type,Len,Label,Comment
+1,CRASH_ID,Num,8,"Crash ID  (internal, auto-generated unique identifying number)","See ReadMe_rev_07-2009 file, Part IV-A"
+2,VHCL_ID,Num,8,"Vehicle ID  (internal, auto-generated unique identifying number)","See ReadMe_rev_07-2009 file, Part IV-A"
+3,VHCL_CODED_SEQ_NO,Num,2,"Vehicle Coded Sequence Number  (corresponds to Code Manual - ""Vehicle Number"")",
+4,VHCL_OWNSHP_CD,Char,1,Vehicle Ownership Code,
+5,VHCL_OWNSHP_SHORT_DESC,Char,5,Vehicle Ownership Short Description,
+6,VHCL_USE_CD,Char,1,Vehicle Special Use Code,
+7,VHCL_USE_SHORT_DESC,Char,6,Vehicle Special Use Short Description,
+8,VHCL_TYP_CD,Char,2,Vehicle Type Code,
+9,VHCL_TYP_SHORT_DESC,Char,10,Vehicle Type Short Description,
+10,EMRGCY_VHCL_USE_FLG,Num,8,Vehicle in Use as Emergency Vehicle Flag,
+11,TRLR_QTY,Num,8,Number of Trailers Code,
+12,MVMNT_CD,Char,1,Vehicle Movement Code,
+13,MVMNT_SHORT_DESC,Char,6,Vehicle Movement Short Description,
+14,CMPSS_DIR_FROM_CD,Char,1,Vehicle Travel Direction From Code,
+15,VHCL_CMPSS_DIR_FROM_SHORT_DESC,Char,2,Vehicle Travel Direction From Short Description,
+16,CMPSS_DIR_TO_CD,Char,1,Vehicle Travel Direction To Code,
+17,VHCL_CMPSS_DIR_TO_SHORT_DESC,Char,2,Vehicle Travel Direction To Short Description,
+18,ACTN_CD,Char,3,Vehicle Action Code,
+19,ACTN_SHORT_DESC,Char,9,Vehicle Action Short Description,
+20,VHCL_CAUSE_1_CD,Char,2,Vehicle Cause 1 Code ,
+21,VHCL_CAUSE_1_SHORT_DESC,Char,8,Vehicle Cause 1 Short Description,
+22,VHCL_CAUSE_2_CD,Char,2,Vehicle Cause 2 Code ,
+23,VHCL_CAUSE_2_SHORT_DESC,Char,8,Vehicle Cause 2 Short Description,
+24,VHCL_CAUSE_3_CD,Char,2,Vehicle Cause 3 Code ,
+25,VHCL_CAUSE_3_SHORT_DESC,Char,8,Vehicle Cause 3 Short Description,
+26,VHCL_EVNT_1_CD,Char,3,Vehicle Event 1 Code,
+27,VHCL_EVNT_1_SHORT_DESC,Char,10,Vehicle Event 1 Short Description,
+28,VHCL_EVNT_2_CD,Char,3,Vehicle Event 2 Code,
+29,VHCL_EVNT_2_SHORT_DESC,Char,10,Vehicle Event 2 Short Description,
+30,VHCL_EVNT_3_CD,Char,3,Vehicle Event 3 Code,
+31,VHCL_EVNT_3_SHORT_DESC,Char,10,Vehicle Event 3 Short Description,
+32,VHCL_SPEED_FLG,Num,8,Vehicle Speeding Flag,
+33,VHCL_HIT_RUN_FLG,Num,8,Vehicle Hit and Run Flag,see Code Manual
+34,VHCL_SFTY_EQUIP_USED_QTY,Num,8,Vehicle Safety Equipment Used Quantity,see Code Manual
+35,VHCL_SFTY_EQUIP_UNUSED_QTY,Num,8,Vehicle Safety Equipment Unused Quantity,see Code Manual
+36,VHCL_SFTY_EQUIP_USE_UNKNWN_QTY,Num,8,Vehicle Safety Equipment Use Unknown Quantity,see Code Manual
+37,VHCL_OCCUP_CNT,Num,8,Vehicle Occupant Count,
+38,STRIKG_VHCL_FLG,Num,8,Striking Participant Flag  (indicates this vehicle was the initial striker),

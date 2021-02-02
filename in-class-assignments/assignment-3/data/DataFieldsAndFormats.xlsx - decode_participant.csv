@@ -1,0 +1,55 @@
+#,Database Field Name,Type,Len,Label,Comment
+1,CRASH_ID,Num,8,"Crash ID  (internal, auto-generated unique identifying number)","See ReadMe_rev_07-2009 file, Part IV-A"
+2,VHCL_ID,Num,8,"Vehicle ID  (internal, auto-generated unique identifying number)","See ReadMe_rev_07-2009 file, Part IV-A"
+3,PARTIC_ID,Num,8,"Participant ID  (internal, auto-generated unique identifying number)","See ReadMe_rev_07-2009 file, Part IV-A"
+4,PARTIC_DSPLY_SEQ_NO,Num,2,Participant Number (Sequential),"see Code Manual, ""Participant Number"""
+5,VHCL_CODED_SEQ_NO,Num,2,"Vehicle Coded Sequence Number  (corresponds to Code Manual - ""Vehicle Number"")",
+6,PARTIC_VHCL_SEQ_NO,Num,2,Participant Vehicle Sequence Number  (order of participants in this vehicle),see Code Manual
+7,PARTIC_TYP_CD,Char,1,Participant Type Code,
+8,PARTIC_TYP_SHORT_DESC,Char,4,Participant Type Short Description,
+9,PARTIC_HIT_RUN_FLG,Num,8,Participant Level Hit and Run Flag,This participant fled the scene
+10,PUB_EMPL_FLG,Num,8,Public Employee Flag,This participant was a public employee
+11,SEX_CD,Char,1,Sex Code,
+12,AGE_VAL,Char,2,Age,
+13,DRVR_LIC_STAT_CD,Char,1,Driver License Status Code,
+14,DRVR_LIC_STAT_SHORT_DESC,Char,5,Driver License Status Short Description,
+15,DRVR_RES_STAT_CD,Char,1,Residence of Driver Code,
+16,DRVR_RES_SHORT_DESC,Char,5,Residence of Driver Description Code,
+17,INJ_SVRTY_CD,Char,1,Participant Injury Severity Code,
+18,INJ_SVRTY_SHORT_DESC,Char,4,Participant Injury Severity Short Description,
+19,SFTY_EQUIP_USE_CD,Char,1,Participant Safety Equipment Use Code,
+20,SFTY_EQUIP_USE_SHORT_DESC,Char,10,Participant Safety Equipment Short Description,
+21,AIRBAG_DEPLOY_IND,Char,1,Airbag Deployment Indicator (Participant),
+22,MVMNT_CD,Char,1,Non-motorist Movement Code,
+23,MVMNT_SHORT_DESC,Char,6,Non-motorist Movement Short Description,
+24,CMPSS_DIR_FROM_CD,Char,1,Non-motorist Direction of Travel From,
+25,PARTIC_CMPSS_DIR_FROM_SHORT_DESC,Char,2,Non-motorist Direction of Travel From (Short Description),
+26,CMPSS_DIR_TO_CD,Char,1,Non-motorist Direction of Travel To,
+27,PARTIC_CMPSS_DIR_TO_SHORT_DESC,Char,2,Non-motorist Direction of Travel To (Short Description),
+28,NON_MOTRST_LOC_CD,Char,2,Non-Motorist Location Code,
+29,NON_MOTRST_LOC_SHORT_DESC,Char,9,Non-Motorist Location Short Description,
+30,ACTN_CD,Char,3,Participant Action Code,
+31,ACTN_SHORT_DESC,Char,9,Participant Action Code,
+32,PARTIC_ERR_1_CD,Char,3,Participant Error Code 1,
+33,PARTIC_ERR_1_SHORT_DESC,Char,10,Participant Error Code 1 Short Description,
+34,PARTIC_ERR_2_CD,Char,3,Participant Error Code 2,
+35,PARTIC_ERR_2_SHORT_DESC,Char,10,Participant Error Code 2 Short Description,
+36,PARTIC_ERR_3_CD,Char,3,Participant Error Code 3,
+37,PARTIC_ERR_3_SHORT_DESC,Char,10,Participant Error Code 3 Short Description,
+38,PARTIC_CAUSE_1_CD,Char,2,Participant Cause Code 1,
+39,PARTIC_CAUSE_1_SHORT_DESC,Char,8,Participant Cause Code 1 Short Description,
+40,PARTIC_CAUSE_2_CD,Char,2,Participant Cause Code 2,
+41,PARTIC_CAUSE_2_SHORT_DESC,Char,8,Participant Cause Code 2 Short Description,
+42,PARTIC_CAUSE_3_CD,Char,2,Participant Cause Code 3,
+43,PARTIC_CAUSE_3_SHORT_DESC,Char,8,Participant Cause Code 3 Short Description,
+44,PARTIC_EVNT_1_CD,Char,3,Participant Event Code 1,
+45,PARTIC_EVNT_1_SHORT_DESC,Char,10,Participant Event Code 1 Short Description,
+46,PARTIC_EVNT_2_CD,Char,3,Participant Event Code 2,
+47,PARTIC_EVNT_2_SHORT_DESC,Char,10,Participant Event Code 2 Short Description,
+48,PARTIC_EVNT_3_CD,Char,10,Participant Event Code 3,
+49,PARTIC_EVNT_3_SHORT_DESC,Char,10,Participant Event Code 3 Short Description,
+50,BAC_VAL,Char,2,Blood Alcohol Content Value  (includes codes for values over 80 -- see manual),
+51,ALCHL_USE_RPT_IND,Char,1,Alchol Use Reported Code (Participant),Indicates whether or not this participant had been using drugs
+52,DRUG_USE_RPT_IND,Char,1,Drug Use Reported Indicator ,Indicates whether or not this participant had been drinking
+52,MJ_USE_RPT_IND,Char,1,Marijuana Use Reported Indicator ,"Indicates if this participant was impaired by cannabis products, whether impairment was suspected."
+53,STRIKG_PARTIC_FLG,Num,8,Striking Participant Flag  ,Indicates this participant was the initial striker - applies to non-motorists
