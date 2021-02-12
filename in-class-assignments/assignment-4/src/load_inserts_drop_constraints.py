@@ -188,7 +188,7 @@ def add_constraints(conn):
     with conn.cursor() as cursor:
         cursor.execute(f"""
                         ALTER TABLE {TableName} ADD PRIMARY KEY (Year, CensusTract);
-                        CREATE INDEX idx_{TableName}_State ON {TableName}(State);"
+                        CREATE INDEX idx_{TableName}_State ON {TableName}(State);
                         """)
     print("Added constraints after loading data.")
 
