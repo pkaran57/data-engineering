@@ -238,7 +238,7 @@ def load(conn, icmdlist):
 
         # append the staging data to the main CensusData table
         print("Append the staging data to the main CensusData table ...")
-        cursor.execute(f"INSERT INTO {get_unlogged_table_name()} SELECT * FROM ({TableName});")
+        cursor.execute(f"INSERT INTO {get_unlogged_table_name()} SELECT * FROM {TableName};")
 
         elapsed = time.perf_counter() - start
         print(f'Finished Loading. Elapsed Time: {elapsed:0.4} seconds')
