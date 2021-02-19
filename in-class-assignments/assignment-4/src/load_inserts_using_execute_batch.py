@@ -143,8 +143,8 @@ def load(conn, rlis):
         print(f"Loading {len(rlis)} rows")
         start = time.perf_counter()
 
-        psycopg2.extras.execute_batch(cursor, """
-            INSERT INTO staging_beers VALUES (
+        psycopg2.extras.execute_batch(cursor, f"""
+            INSERT INTO {TableName} VALUES (
                 %(Year)s,
                 %(CensusTract)s,
                 %(State)s,
