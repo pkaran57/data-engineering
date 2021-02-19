@@ -6,6 +6,7 @@ import csv
 import time
 
 import psycopg2
+import psycopg2.extras
 
 DBname = "census_db"
 DBuser = "pkaran"
