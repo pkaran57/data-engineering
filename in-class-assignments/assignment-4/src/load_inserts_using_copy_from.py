@@ -3,7 +3,9 @@
 
 import argparse
 import csv
+import io
 import time
+from typing import Optional, Any
 
 import psycopg2
 
@@ -23,47 +25,7 @@ def row2vals(row):
             row[key] = 0
         row['County'] = row['County'].replace('\'', '')  # eliminate quotes within literals
 
-    ret = f"""
-       {Year},                          -- Year
-       {row['CensusTract']},            -- CensusTract
-       '{row['State']}',                -- State
-       '{row['County']}',               -- County
-       {row['TotalPop']},               -- TotalPop
-       {row['Men']},                    -- Men
-       {row['Women']},                  -- Women
-       {row['Hispanic']},               -- Hispanic
-       {row['White']},                  -- White
-       {row['Black']},                  -- Black
-       {row['Native']},                 -- Native
-       {row['Asian']},                  -- Asian
-       {row['Pacific']},                -- Pacific
-       {row['Citizen']},                -- Citizen
-       {row['Income']},                 -- Income
-       {row['IncomeErr']},              -- IncomeErr
-       {row['IncomePerCap']},           -- IncomePerCap
-       {row['IncomePerCapErr']},        -- IncomePerCapErr
-       {row['Poverty']},                -- Poverty
-       {row['ChildPoverty']},           -- ChildPoverty
-       {row['Professional']},           -- Professional
-       {row['Service']},                -- Service
-       {row['Office']},                 -- Office
-       {row['Construction']},           -- Construction
-       {row['Production']},             -- Production
-       {row['Drive']},                  -- Drive
-       {row['Carpool']},                -- Carpool
-       {row['Transit']},                -- Transit
-       {row['Walk']},                   -- Walk
-       {row['OtherTransp']},            -- OtherTransp
-       {row['WorkAtHome']},             -- WorkAtHome
-       {row['MeanCommute']},            -- MeanCommute
-       {row['Employed']},               -- Employed
-       {row['PrivateWork']},            -- PrivateWork
-       {row['PublicWork']},             -- PublicWork
-       {row['SelfEmployed']},           -- SelfEmployed
-       {row['FamilyWork']},             -- FamilyWork
-       {row['Unemployment']}            -- Unemployment
-	"""
-    return ret
+    return row
 
 
 def initialize():
@@ -173,14 +135,65 @@ def createTable(conn):
         print(f"Created {TableName}")
 
 
-def load(conn):
+def clean_csv_value(value: Optional[Any]) -> str:
+    if value is None:
+        return r'\N'
+    return str(value).replace('\n', '\\n')
+
+
+def load(conn, rows):
+    csv_file_like_object = io.StringIO()
+    for row in rows:
+        row = row2vals(row)
+        csv_file_like_object.write('|'.join(map(clean_csv_value, (
+            Year,
+            row['CensusTract'],
+            row['State'],
+            row['County'],
+            row['TotalPop'],
+            row['Men'],
+            row['Women'],
+            row['Hispanic'],
+            row['White'],
+            row['Black'],
+            row['Native'],
+            row['Asian'],
+            row['Pacific'],
+            row['Citizen'],
+            row['Income'],
+            row['IncomeErr'],
+            row['IncomePerCap'],
+            row['IncomePerCapErr'],
+            row['Poverty'],
+            row['ChildPoverty'],
+            row['Professional'],
+            row['Service'],
+            row['Office'],
+            row['Construction'],
+            row['Production'],
+            row['Drive'],
+            row['Carpool'],
+            row['Transit'],
+            row['Walk'],
+            row['OtherTransp'],
+            row['WorkAtHome'],
+            row['MeanCommute'],
+            row['Employed'],
+            row['PrivateWork'],
+            row['PublicWork'],
+            row['SelfEmployed'],
+            row['FamilyWork'],
+            row['Unemployment']
+        ))) + '\n')
+    csv_file_like_object.seek(0)
+
     with conn.cursor() as cursor:
-        print(f"Loading data ...")
         start = time.perf_counter()
+        print(f"Loading data ...")
 
         with open(Datafile, mode="r") as file:
-            file.readline()     # read header line
-            cursor.copy_from(file, TableName, sep=',')
+            file.readline()  # read header line
+            cursor.copy_from(csv_file_like_object, TableName, sep=',')
 
         elapsed = time.perf_counter() - start
         print(f'Finished Loading. Elapsed Time: {elapsed:0.4} seconds')
@@ -189,11 +202,12 @@ def load(conn):
 def main():
     initialize()
     conn = dbconnect()
+    rows = readdata(Datafile)
 
     if CreateDB:
         createTable(conn)
 
-    load(conn)
+    load(conn, rows)
 
 
 if __name__ == "__main__":
