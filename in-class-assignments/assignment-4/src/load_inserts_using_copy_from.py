@@ -193,7 +193,7 @@ def load(conn, rows):
 
         with open(Datafile, mode="r") as file:
             file.readline()  # read header line
-            cursor.copy_from(csv_file_like_object, TableName, sep=',')
+            cursor.copy_from(csv_file_like_object, TableName, sep='|')
 
         elapsed = time.perf_counter() - start
         print(f'Finished Loading. Elapsed Time: {elapsed:0.4} seconds')
