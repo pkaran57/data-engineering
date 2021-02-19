@@ -179,6 +179,7 @@ def load(conn):
         start = time.perf_counter()
 
         with open(Datafile, mode="r") as file:
+            file.readline()     # read header line
             cursor.copy_from(file, TableName, sep=',')
 
         elapsed = time.perf_counter() - start
