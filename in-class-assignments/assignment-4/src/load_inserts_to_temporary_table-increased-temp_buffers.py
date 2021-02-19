@@ -178,8 +178,8 @@ def createTemporaryTable(conn):
     with conn.cursor() as cursor:
 
         # Increase buffer size to speed up transactions
-        print(f"Increasing temp_buffers to 750 MB")
-        cursor.execute("""SET temp_buffers = '750MB';""")
+        print(f"Increasing temp_buffers to 1500 MB")
+        cursor.execute("""SET temp_buffers = '1500MB';""")
 
         temporary_table_name = get_temporary_table_name()
         cursor.execute(f"""
